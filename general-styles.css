@@ -1,0 +1,101 @@
+html,
+body {
+  background-color: darkgray;
+  font-family: "Poppins", sans-serif;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap {
+  gap: 0.75rem;
+}
+.w-full {
+  width: 100%;
+}
+.pad {
+  padding: 0.75rem;
+}
+.text-box {
+  background-color: red;
+}
+.navbar {
+  background-color: whitesmoke;
+  margin-bottom: 0.75rem;
+  border: 1px solid black;
+}
+.rounded {
+  border-radius: 5px;
+}
+.btn {
+  display: flex;
+  padding: 8px;
+  background-color: black;
+  opacity: 0.8;
+  border-radius: 5px;
+  color: azure;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn:disabled:hover {
+  scale: 1;
+  opacity: 0.5;
+}
+.btn:hover {
+  scale: 1.1;
+  opacity: 1;
+}
+.search-bar {
+  border: 3px solid;
+  border-radius: 10px;
+  text-indent: 5px;
+  transition: 0.2s;
+}
+.search-bar:focus {
+  border: 3px solid azure;
+}
+.card {
+  background-color: whitesmoke;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.text {
+  padding: 0;
+  margin: 0;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}

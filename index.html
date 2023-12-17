@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./general-styles.css" />
+    <script defer src="./components/MealItem.js"></script>
+    <script defer src="./index.js"></script>
+
+    <title>Final</title>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="navbar pad rounded flex flex-row items-center justify-between"
+      >
+        <img
+          alt="img"
+          src="./images/restaurant-icon-png-plate-1.png"
+          width="75px"
+        />
+        <p>Table No: 4a</p>
+        <div class="routes flex flex-row gap">
+          <div class="btn">View Selected Meals</div>
+        </div>
+      </div>
+      <div id="meal-list-card" class="card grid grid-cols-6 gap"></div>
+    </div>
+  </body>
+</html>
