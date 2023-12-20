@@ -1,4 +1,4 @@
-class MealItem extends HTMLElement {
+class CheckoutItem extends HTMLElement {
   connectedCallback() {
     const mealId = this.getAttribute("meal-id");
 
@@ -49,4 +49,4 @@ class MealItem extends HTMLElement {
   }
 }
 
-customElements.define("meal-item", MealItem);
+customElements.define("checkout-item", CheckoutItem);

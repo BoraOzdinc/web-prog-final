@@ -36,6 +36,9 @@ body {
 .w-full {
   width: 100%;
 }
+.max-w-min {
+  max-width: min-content;
+}
 .pad {
   padding: 0.75rem;
 }
@@ -59,6 +62,10 @@ body {
   color: azure;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+}
+.svg-btn {
+  filter: invert(100%) sepia(0%) saturate(7480%) hue-rotate(349deg)
+    brightness(89%) contrast(107%);
 }
 .btn:disabled {
   opacity: 0.5;
@@ -99,3 +106,52 @@ body {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.m-0 {
+  margin: 0px;
+}
+.a-btn {
+  text-decoration: none;
+  display: flex;
+  padding: 8px;
+  background-color: black;
+  opacity: 0.8;
+  border-radius: 5px;
+  color: azure;
+  cursor: pointer;
+}
+/* PopOver Css */
+
+.wrapper {
+  position: relative;
+  padding: 20px;
+}
+
+.trigger {
+  margin-bottom: 10px;
+}
+
+.content {
+  visibility: hidden;
+  background-color: #bfbfbf;
+  position: absolute;
+  padding: 15px;
+}
+
+.content:before {
+  position: absolute;
+  top: -10px;
+  content: "";
+  right: calc(50% - 10px);
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #bfbfbf transparent;
+}
+
+.wrapper:hover .content {
+  visibility: visible;
+}
+/* PopOver Css Over*/

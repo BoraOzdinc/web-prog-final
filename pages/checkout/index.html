@@ -3,11 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./general-styles.css" />
-    <script defer src="./components/MealItem.js"></script>
-    <script defer src="./index.js"></script>
+    <link rel="stylesheet" href="../../general-styles.css" />
 
-    <title>Restaurant</title>
+    <title>Restaurant - Checkout</title>
   </head>
   <body>
     <div class="container">
@@ -16,7 +14,7 @@
       >
         <img
           alt="img"
-          src="./images/restaurant-icon-png-plate-1.png"
+          src="../../images/restaurant-icon-png-plate-1.png"
           width="75px"
         />
         <p>Table No: 4a</p>
@@ -36,7 +34,21 @@
           </div>
         </div>
       </div>
-      <div id="meal-list-card" class="card grid grid-cols-6 gap"></div>
+      <div class="card">
+        <div class="pad flex flex-row items-center justify-between">
+          <a class="btn max-w-min"
+            ><img
+              class="svg-btn"
+              src="../../images/arrow-left.png"
+              alt="go back"
+          /></a>
+          <p class="text-xl m-0">Checkout</p>
+        </div>
+        <div class="card">
+          <div class="checkout-items-list"></div>
+        </div>
+      </div>
     </div>
   </body>
+  <script defer type="module" src="./index.js"></script>
 </html>
