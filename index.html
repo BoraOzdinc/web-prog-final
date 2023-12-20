@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./general-styles.css" />
-    <script defer src="./components/MealItem.js"></script>
-    <script defer src="./index.js"></script>
+    <script defer type="module" src="./components/MealItem.js"></script>
+    <script defer type="module" src="./index.js"></script>
 
     <title>Restaurant</title>
   </head>
@@ -14,11 +14,12 @@
       <div
         class="navbar pad rounded flex flex-row items-center justify-between"
       >
-        <img
-          alt="img"
-          src="./images/restaurant-icon-png-plate-1.png"
-          width="75px"
-        />
+        <a href="/">
+          <img
+            alt="img"
+            src="./images/restaurant-icon-png-plate-1.png"
+            width="75px"
+        /></a>
         <p>Table No: 4a</p>
         <div class="routes flex flex-row gap">
           <div class="wrapper">
@@ -29,9 +30,8 @@
                 class="body card flex flex-col items-center justify-center"
                 id="meal-cart-popover-content"
               ></div>
-              <a class="a-btn" href="/pages/checkout/index.html"
-                >Go to Checkout</a
-              >
+              <p class="m-0" id="total-price-dropdown"></p>
+              <a class="a-btn" href="/pages/checkout">Go to Checkout</a>
             </div>
           </div>
         </div>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../general-styles.css" />
-
+    <script defer type="module" src="./index.js"></script>
+    <script defer type="module" src="../../components/CheckoutItem.js"></script>
     <title>Restaurant - Checkout</title>
   </head>
   <body>
@@ -12,31 +13,17 @@
       <div
         class="navbar pad rounded flex flex-row items-center justify-between"
       >
-        <img
-          alt="img"
-          src="../../images/restaurant-icon-png-plate-1.png"
-          width="75px"
-        />
+        <a href="/">
+          <img
+            alt="img"
+            src="../../images/restaurant-icon-png-plate-1.png"
+            width="75px"
+        /></a>
         <p>Table No: 4a</p>
-        <div class="routes flex flex-row gap">
-          <div class="wrapper">
-            <div class="trigger btn">View Selected Meals</div>
-            <div class="content rounded flex flex-col gap">
-              <div class="heading">Meals in Cart</div>
-              <div
-                class="body card flex flex-col items-center justify-center"
-                id="meal-cart-popover-content"
-              ></div>
-              <a class="a-btn" href="/pages/checkout/index.html"
-                >Go to Checkout</a
-              >
-            </div>
-          </div>
-        </div>
       </div>
       <div class="card">
         <div class="pad flex flex-row items-center justify-between">
-          <a class="btn max-w-min"
+          <a class="btn max-w-min" href="/"
             ><img
               class="svg-btn"
               src="../../images/arrow-left.png"
@@ -45,10 +32,16 @@
           <p class="text-xl m-0">Checkout</p>
         </div>
         <div class="card">
-          <div class="checkout-items-list"></div>
+          <div id="checkout-items-list" class="flex flex-col gap"></div>
+          <div
+            class="flex flex-col items-end justify-end"
+            id="checkout-items-footer"
+          >
+            <p id="checkout-footer-total-price" class="m-0 text-xl">total</p>
+            <p class="btn">Order Meals</p>
+          </div>
         </div>
       </div>
     </div>
   </body>
-  <script defer type="module" src="./index.js"></script>
 </html>

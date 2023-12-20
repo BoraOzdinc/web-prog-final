@@ -24,11 +24,17 @@ body {
 .items-center {
   align-items: center;
 }
+.items-end {
+  align-items: end;
+}
 .justify-center {
   justify-content: center;
 }
 .justify-between {
   justify-content: space-between;
+}
+.justify-end {
+  justify-content: end;
 }
 .gap {
   gap: 0.75rem;
@@ -136,7 +142,8 @@ body {
 
 .content {
   visibility: hidden;
-  background-color: #bfbfbf;
+  background-color: whitesmoke;
+  border: 2px solid black;
   position: absolute;
   padding: 15px;
 }

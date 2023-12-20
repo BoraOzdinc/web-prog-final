@@ -1,3 +1,4 @@
+import { addedItems,addItemToCart,removeItemFromCart } from "../index.js";
 class MealItem extends HTMLElement {
   connectedCallback() {
     const mealId = this.getAttribute("meal-id");
@@ -8,7 +9,7 @@ class MealItem extends HTMLElement {
           "meal-img"
         )}" />
         <p class="text text-base">${this.getAttribute("meal-name")}</p>
-        <p class="text text-sm">${this.getAttribute("meal-price")}</p>
+        <p class="text text-sm">$${this.getAttribute("meal-price")}</p>
         <div class="flex flex-row gap items-center justify-center">
           <button id="remove-item-button-${mealId}" class="btn" disabled>-</button>
           <p id="item-counter-${mealId}" class="">0</p>
