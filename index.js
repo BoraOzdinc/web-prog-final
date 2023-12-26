@@ -23,8 +23,19 @@ export const mealList = [
 ];
 
 export const addedItems = new Map();
+export const orderedMeals = new Map();
 populateMapWithStorage();
+populateOrderedMeals();
 const totalPrice = updateCart();
+
+export function populateOrderedMeals() {
+  const orderedMealsStorage = JSON.parse(localStorage.getItem("orderedMeals"));
+  orderedMealsStorage.length === 0
+    ? localStorage.setItem("orderedMeals", JSON.stringify([""]))
+    : orderedMealsStorage.map((a) => {
+        orderedMeals.set(a[0], a[1]);
+      });
+}
 
 const mealListCard = document.getElementById("meal-list-card");
 for (let i of mealList) {
@@ -75,6 +86,7 @@ export function removeItemFromCart(itemId) {
 
 export function updateCart() {
   const cartBody = document.getElementById("meal-cart-popover-content");
+  const orderButton = document.getElementById("checkout-order-btn");
   const checkoutTotalElement = document.getElementById(
     "checkout-footer-total-price"
   );
@@ -82,6 +94,13 @@ export function updateCart() {
   addedItems.forEach((value, key) => {
     totalPrice = totalPrice + mealList[key].meal_price * value;
   });
+  if (orderButton) {
+    if (addedItems.size === 0) {
+      orderButton.disabled = true;
+    } else {
+      orderButton.disabled = false;
+    }
+  }
 
   if (cartBody) {
     removeChilds(cartBody);
@@ -124,7 +143,7 @@ function removeChilds(parent) {
 export function populateMapWithStorage() {
   const storage = JSON.parse(localStorage.getItem("addedItems"));
   storage.length === 0
-    ? localStorage.setItem("addedItems", "")
+    ? localStorage.setItem("addedItems", JSON.stringify([]))
     : storage.map((a) => {
         addedItems.set(a[0], a[1]);
       });

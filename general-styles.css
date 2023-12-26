@@ -143,16 +143,14 @@ body {
   padding: 20px;
 }
 
-.trigger {
-  margin-bottom: 10px;
-}
-
 .content {
   visibility: hidden;
   background-color: whitesmoke;
   border: 2px solid black;
   position: absolute;
   padding: 15px;
+  z-index: 99;
+  margin-top: 15px;
 }
 
 .content:before {
