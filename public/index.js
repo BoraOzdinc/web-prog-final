@@ -1,6 +1,5 @@
-const allCategories = await axios.get(
-  "http://www.themealdb.com/api/json/v1/1/categories.php"
-);
+const allCategories = await axios.get("/get-categories");
+
 
 const categoryContainer = document.getElementById("category-container");
 if (categoryContainer && allCategories) {

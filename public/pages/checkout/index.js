@@ -1,32 +1,60 @@
-import { mealList, addedItems, updateCart } from "../meals/index.js";
+import {
+  addedItems,
+  updateCart,
+  populateMapWithStorage,
+} from "../meals/index.js";
+populateMapWithStorage();
 updateCart();
+const addedItemsIds = new Array();
+addedItems.forEach((value, key) => {
+  addedItemsIds.push(key);
+});
+console.log(addedItems);
+const meals = await axios({
+  method: "post",
+  url: "/get-meals-with-ids",
+  data: { ids: addedItemsIds },
+});
 
 const mealListCard = document.getElementById("checkout-items-list");
 addedItems.forEach((value, key) => {
   const mealItem = document.createElement("checkout-item");
   if (mealListCard) {
-    mealItem.setAttribute("meal-name", mealList[key].meal_name);
-    mealItem.setAttribute("meal-price", mealList[key].meal_price);
-    mealItem.setAttribute("meal-img", mealList[key].meal_img);
-    mealItem.setAttribute("meal-id", mealList[key].id);
-    mealItem.setAttribute("id", `meal-item-${mealList[key].id}`);
+    mealItem.setAttribute(
+      "meal-name",
+      meals.data.find((meal) => meal.id === Number(key)).meal_name
+    );
+    mealItem.setAttribute(
+      "meal-price",
+      meals.data.find((meal) => meal.id === Number(key)).meal_price
+    );
+    mealItem.setAttribute(
+      "meal-img",
+      meals.data.find((meal) => meal.id === Number(key)).meal_img
+    );
+    mealItem.setAttribute(
+      "meal-id",
+      meals.data.find((meal) => meal.id === Number(key)).id
+    );
+    mealItem.setAttribute(
+      "id",
+      `meal-item-${meals.data.find((meal) => meal.id === Number(key)).id}`
+    );
     mealListCard.appendChild(mealItem);
   }
 });
 
 export const orderedMeals = new Map();
 
-populateOrderedMeals();
-
 export function populateOrderedMeals() {
   const orderedMealsStorage = JSON.parse(localStorage.getItem("orderedMeals"));
-  orderedMealsStorage.length === 0
-    ? localStorage.setItem("orderedMeals", JSON.stringify([""]))
-    : orderedMealsStorage.map((a) => {
+  orderedMealsStorage
+    ? orderedMealsStorage.map((a) => {
         orderedMeals.set(a[0], a[1]);
-      });
+      })
+    : localStorage.setItem("orderedMeals", JSON.stringify([""]));
 }
-
+populateOrderedMeals();
 const orderButton = document.getElementById("checkout-order-btn");
 if (orderButton) {
   console.log(addedItems);

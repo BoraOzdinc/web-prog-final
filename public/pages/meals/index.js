@@ -1,40 +1,25 @@
-export const mealList = [
-  {
-    id: 0,
-    meal_name: "Mac and Cheese",
-    meal_price: 20,
-    meal_img:
-      "https://www.seriouseats.com/thmb/YwaJNJc7_TDAjdo8pzN_JElsgb4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2021__02__20210214-stovetop-mac-cheese-reshoot-vicky-wasik-9-0760b642ca704cf8b2c5121a363a60a2.jpg",
-  },
-  {
-    id: 1,
-    meal_name: "Penne Arrabbiata",
-    meal_price: 15,
-    meal_img:
-      "https://www.giallozafferano.com/images/260-26061/Penne-all-arrabbiata_1200x800.jpg",
-  },
-  {
-    id: 2,
-    meal_name: "Spaghetti Bolognese",
-    meal_price: 18,
-    meal_img:
-      "https://supervalu.ie/thumbnail/800x600/var/files/real-food/recipes/Uploaded-2020/spaghetti-bolognese-recipe.jpg",
-  },
-];
-
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get("category");
-console.log(category);
 
-const meals = await axios.get(
-  `http://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
-);
-console.log(meals);
 export const addedItems = new Map();
 export const orderedMeals = new Map();
+
+const mealList = async () => {
+  if (category) {
+    return await axios({
+      method: "post",
+      url: "/get-meals-with-category",
+      data: {
+        category: category,
+      },
+    });
+  }
+};
+export const allMeals = await axios.get("/get-all-meals");
+const mealListResponse = await mealList();
 populateMapWithStorage();
 populateOrderedMeals();
-const totalPrice = updateCart();
+updateCart();
 
 export function populateOrderedMeals() {
   const orderedMealsStorage = JSON.parse(localStorage.getItem("orderedMeals"));
@@ -46,16 +31,26 @@ export function populateOrderedMeals() {
     : localStorage.setItem("orderedMeals", JSON.stringify([]));
 }
 
+const mealsContainer = document.getElementById("meals-container");
+if (mealsContainer) {
+  const header = document.createElement("h2");
+  header.innerText = `Meals in ${category} category.`;
+  mealsContainer.prepend(header);
+}
+
 const mealListCard = document.getElementById("meal-list-card");
-for (let i of mealList) {
-  const mealItem = document.createElement("meal-item");
-  if (mealListCard) {
-    mealItem.setAttribute("meal-name", i.meal_name);
-    mealItem.setAttribute("meal-price", i.meal_price);
-    mealItem.setAttribute("meal-img", i.meal_img);
-    mealItem.setAttribute("meal-id", i.id);
-    mealItem.setAttribute("id", `meal-item-${i.id}`);
-    mealListCard.appendChild(mealItem);
+if (category) {
+  for (let i of mealListResponse.data) {
+    const mealItem = document.createElement("meal-item");
+    if (mealListCard) {
+      mealItem.className = "flex";
+      mealItem.setAttribute("meal-name", i.meal_name);
+      mealItem.setAttribute("meal-price", i.meal_price);
+      mealItem.setAttribute("meal-img", i.meal_img);
+      mealItem.setAttribute("meal-id", i.id);
+      mealItem.setAttribute("id", `meal-item-${i.id}`);
+      mealListCard.appendChild(mealItem);
+    }
   }
 }
 
@@ -101,8 +96,11 @@ export function updateCart() {
   );
   let totalPrice = 0;
   addedItems.forEach((value, key) => {
-    totalPrice = totalPrice + mealList[key].meal_price * value;
+    totalPrice =
+      totalPrice +
+      allMeals.data.find((meal) => meal.id === Number(key)).meal_price * value;
   });
+
   if (orderButton) {
     if (addedItems.size === 0) {
       orderButton.disabled = true;
@@ -124,8 +122,12 @@ export function updateCart() {
 
       const item = document.createElement("p");
       const itemPrice = document.createElement("p");
-      item.innerText = `${value}x ${mealList[key].meal_name}`;
-      itemPrice.innerText = `$${mealList[key].meal_price}`;
+      item.innerText = `${value}x ${
+        allMeals.data.find((meal) => meal.id === Number(key)).meal_name
+      }`;
+      itemPrice.innerText = `$${
+        allMeals.data.find((meal) => meal.id === Number(key)).meal_price
+      }`;
 
       itemBox.appendChild(item);
       itemBox.appendChild(itemPrice);
