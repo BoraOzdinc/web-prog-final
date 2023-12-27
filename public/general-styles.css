@@ -89,7 +89,7 @@ body {
   opacity: 0.5;
 }
 .btn:hover {
-  scale: 1.1;
+  scale: 105%;
   opacity: 1;
 }
 .search-bar {

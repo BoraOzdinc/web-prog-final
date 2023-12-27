@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./general-styles.css" />
+    <script defer type="module" src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="navbar pad rounded flex flex-row items-center justify-between"
+      >
+        <a href="/pages/meals">
+          <img
+            alt="img"
+            src="../../images/restaurant-icon-png-plate-1.png"
+            width="75px"
+        /></a>
+        <p>Table No: 4a</p>
+        <div class="flex flex-row items-center justify-center">
+          <a class="a-btn btn" href="/pages/orders/">Ordered Meals</a>
+          <div class="routes flex flex-row gap">
+            <div class="wrapper">
+              <div class="trigger btn">View Selected Meals</div>
+              <div class="content rounded flex flex-col gap">
+                <div class="heading">Meals in Cart</div>
+                <div
+                  class="body card flex flex-col items-center justify-center"
+                  id="meal-cart-popover-content"
+                ></div>
+                <p class="m-0" id="total-price-dropdown"></p>
+                <a class="a-btn" href="/pages/checkout">Go to Checkout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="category-container" class="card grid grid-cols-2 gap"></div>
+    </div>
+  </body>
+</html>

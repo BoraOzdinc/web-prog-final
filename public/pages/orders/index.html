@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../general-styles.css" />
     <script defer type="module" src="./index.js"></script>
-    <script defer type="module" src="../../components/CheckoutItem.js"></script>
-    <title>Restaurant - Checkout</title>
+    <script defer type="module" src="../../components/OrderItem.js"></script>
+    <title>Reastaurant - Orders</title>
   </head>
   <body>
     <div class="container">
@@ -20,28 +20,41 @@
             width="75px"
         /></a>
         <p>Table No: 4a</p>
+        <div class="routes flex flex-row gap">
+          <div class="wrapper">
+            <div class="trigger btn">View Selected Meals</div>
+            <div class="content rounded flex flex-col gap">
+              <div class="heading">Meals in Cart</div>
+              <div
+                class="body card flex flex-col items-center justify-center"
+                id="meal-cart-popover-content"
+              ></div>
+              <p class="m-0" id="total-price-dropdown"></p>
+              <a class="a-btn" href="/pages/checkout">Go to Checkout</a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card">
         <div class="pad flex flex-row items-center justify-between">
           <div class="flex flex-row items-center gap">
-            <a class="btn max-w-min" href="/"
+            <a class="btn max-w-min" href="/pages/meals"
               ><img
                 class="svg-btn"
                 src="../../images/arrow-left.png"
                 alt="go back"
             /></a>
-            <p>Go Back</p>
+            <p>Go To Menu</p>
           </div>
-          <p class="text-xl m-0">Checkout</p>
+          <p class="text-xl m-0">Orders</p>
         </div>
         <div class="card">
-          <div id="checkout-items-list" class="flex flex-col gap"></div>
+          <div id="order-items-list" class="flex flex-col gap"></div>
           <div
             class="flex flex-col items-end justify-end"
-            id="checkout-items-footer"
+            id="order-items-footer"
           >
-            <p id="checkout-footer-total-price" class="m-0 text-xl">total</p>
-            <button id="checkout-order-btn" class="btn">Order Meals</button>
+            <p id="order-footer-total-price" class="m-0 text-xl">total</p>
           </div>
         </div>
       </div>

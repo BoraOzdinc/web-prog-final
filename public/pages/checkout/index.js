@@ -1,4 +1,4 @@
-import { mealList, addedItems, updateCart } from "../../index.js";
+import { mealList, addedItems, updateCart } from "../meals/index.js";
 updateCart();
 
 const mealListCard = document.getElementById("checkout-items-list");

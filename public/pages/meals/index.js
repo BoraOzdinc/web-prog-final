@@ -22,6 +22,14 @@ export const mealList = [
   },
 ];
 
+const urlParams = new URLSearchParams(window.location.search);
+const category = urlParams.get("category");
+console.log(category);
+
+const meals = await axios.get(
+  `http://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+);
+console.log(meals);
 export const addedItems = new Map();
 export const orderedMeals = new Map();
 populateMapWithStorage();
@@ -30,11 +38,12 @@ const totalPrice = updateCart();
 
 export function populateOrderedMeals() {
   const orderedMealsStorage = JSON.parse(localStorage.getItem("orderedMeals"));
-  orderedMealsStorage.length === 0
-    ? localStorage.setItem("orderedMeals", JSON.stringify([""]))
-    : orderedMealsStorage.map((a) => {
+
+  orderedMealsStorage
+    ? orderedMealsStorage.map((a) => {
         orderedMeals.set(a[0], a[1]);
-      });
+      })
+    : localStorage.setItem("orderedMeals", JSON.stringify([]));
 }
 
 const mealListCard = document.getElementById("meal-list-card");
@@ -142,9 +151,9 @@ function removeChilds(parent) {
 
 export function populateMapWithStorage() {
   const storage = JSON.parse(localStorage.getItem("addedItems"));
-  storage.length === 0
-    ? localStorage.setItem("addedItems", JSON.stringify([]))
-    : storage.map((a) => {
+  storage
+    ? storage.map((a) => {
         addedItems.set(a[0], a[1]);
-      });
+      })
+    : localStorage.setItem("addedItems", JSON.stringify([]));
 }

@@ -1,4 +1,8 @@
-import { populateOrderedMeals, orderedMeals, mealList } from "../../index.js";
+import {
+  populateOrderedMeals,
+  orderedMeals,
+  mealList,
+} from "../meals/index.js";
 populateOrderedMeals();
 
 let totalPrice = 0;

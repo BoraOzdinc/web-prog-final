@@ -1,4 +1,9 @@
-import { addedItems, addItemToCart, orderedMeals, removeItemFromCart } from "../index.js";
+import {
+  addedItems,
+  addItemToCart,
+  orderedMeals,
+  removeItemFromCart,
+} from "../pages/meals/index.js";
 class OrderItem extends HTMLElement {
   connectedCallback() {
     const mealId = this.getAttribute("meal-id");
