@@ -26,7 +26,7 @@ app.get("/get-categories", async (req, res) => {
     res.status(500).send("An error occurred while making the request.");
   }
 });
-app.get("/get-all-meals", async (req, res) => {
+app.get("meals/get-all-", async (req, res) => {
   try {
     const categories = await axios({
       url: "http://www.themealdb.com/api/json/v1/1/categories.php",
@@ -36,28 +36,31 @@ app.get("/get-all-meals", async (req, res) => {
         const meals = await axios({
           url: `http://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`,
         });
-        const mealsWithPrice = meals.data.meals.map((meal) => {
-          const mealPrice = Number(meal.idMeal.slice(-2));
-          if (mealPrice < 10) {
+        const mealsWithPrice = Promise.all(
+          meals.data.meals.map((meal) => {
+            const mealPrice = Number(meal.idMeal.slice(-2));
+            if (mealPrice < 10) {
+              return {
+                meal_price: Math.round(Number(meal.idMeal.slice(-3)) / 10),
+                id: Number(meal.idMeal),
+                meal_name: meal.strMeal,
+                meal_img: meal.strMealThumb,
+              };
+            }
             return {
-              meal_price: Math.round(Number(meal.idMeal.slice(-3)) / 10),
+              meal_price: mealPrice,
               id: Number(meal.idMeal),
               meal_name: meal.strMeal,
               meal_img: meal.strMealThumb,
             };
-          }
-          return {
-            meal_price: mealPrice,
-            id: Number(meal.idMeal),
-            meal_name: meal.strMeal,
-            meal_img: meal.strMealThumb,
-          };
-        });
-        return await mealsWithPrice;
+          })
+        );
+        return mealsWithPrice;
       })
     );
     const allMealsResponse = await allMeals;
     const editedMeals = allMealsResponse.flat();
+    isLoading = false;
     res.json(editedMeals);
   } catch (error) {
     console.error(error);
@@ -98,7 +101,6 @@ app.post("/get-meals-with-category", async (req, res) => {
 });
 
 app.post("/get-meals-with-ids", async (req, res) => {
-  console.log(req.body);
   if (req.body.ids) {
     const meals = Promise.all(
       req.body.ids.map(async (id) => {

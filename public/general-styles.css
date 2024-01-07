@@ -76,6 +76,17 @@ body {
   cursor: pointer;
   border: none;
 }
+.btn-disabled {
+  display: flex;
+  padding: 8px;
+  background-color: black;
+  opacity: 0.5;
+  border-radius: 5px;
+  color: azure;
+  transition: 0.2s ease-in-out;
+  cursor: not-allowed;
+  border: none;
+}
 .svg-btn {
   filter: invert(100%) sepia(0%) saturate(7480%) hue-rotate(349deg)
     brightness(89%) contrast(107%);
@@ -84,12 +95,10 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.btn:disabled:hover {
-  scale: 1;
+.btn:disabled:hover .btn-disabled:hover {
   opacity: 0.5;
 }
 .btn:hover {
-  scale: 105%;
   opacity: 1;
 }
 .search-bar {
@@ -108,6 +117,7 @@ body {
   border-radius: 5px;
   border: 1px solid black;
   height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .text {
   padding: 0;
@@ -173,6 +183,16 @@ body {
 @media (min-width: 1024px) {
   .lg\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

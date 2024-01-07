@@ -3,6 +3,11 @@ const category = urlParams.get("category");
 
 export const addedItems = new Map();
 export const orderedMeals = new Map();
+const cartBody = document.getElementById("meal-cart-popover-content");
+const allMeals = await axios.get("/get-all-meals");
+if (cartBody) {
+  updateCart();
+}
 
 const mealList = async () => {
   if (category) {
@@ -15,11 +20,8 @@ const mealList = async () => {
     });
   }
 };
-export const allMeals = await axios.get("/get-all-meals");
-const mealListResponse = await mealList();
 populateMapWithStorage();
 populateOrderedMeals();
-updateCart();
 
 export function populateOrderedMeals() {
   const orderedMealsStorage = JSON.parse(localStorage.getItem("orderedMeals"));
@@ -40,6 +42,14 @@ if (mealsContainer) {
 
 const mealListCard = document.getElementById("meal-list-card");
 if (category) {
+  //? while waiting for the response fill the card with a loading text
+  const loadingText = document.createElement("p");
+  loadingText.innerText = "Loading...";
+  mealListCard.appendChild(loadingText);
+
+  const mealListResponse = await mealList();
+  mealListCard.removeChild(loadingText);
+
   for (let i of mealListResponse.data) {
     const mealItem = document.createElement("meal-item");
     if (mealListCard) {
@@ -88,26 +98,8 @@ export function removeItemFromCart(itemId) {
   updateCart();
 }
 
-export function updateCart() {
-  const cartBody = document.getElementById("meal-cart-popover-content");
-  const orderButton = document.getElementById("checkout-order-btn");
-  const checkoutTotalElement = document.getElementById(
-    "checkout-footer-total-price"
-  );
+export async function updateCart() {
   let totalPrice = 0;
-  addedItems.forEach((value, key) => {
-    totalPrice =
-      totalPrice +
-      allMeals.data.find((meal) => meal.id === Number(key)).meal_price * value;
-  });
-
-  if (orderButton) {
-    if (addedItems.size === 0) {
-      orderButton.disabled = true;
-    } else {
-      orderButton.disabled = false;
-    }
-  }
 
   if (cartBody) {
     removeChilds(cartBody);
@@ -135,10 +127,35 @@ export function updateCart() {
       cartBody.appendChild(itemBox);
     });
     const totalPriceElement = document.getElementById("total-price-dropdown");
+    addedItems.forEach((value, key) => {
+      totalPrice =
+        totalPrice +
+        allMeals.data.find((meal) => meal.id === Number(key)).meal_price *
+          value;
+    });
     totalPriceElement.innerText = `Total $${totalPrice}`;
   }
 
+  const orderButton = document.getElementById("checkout-order-btn");
+
+  const checkoutTotalElement = document.getElementById(
+    "checkout-footer-total-price"
+  );
+
+  if (orderButton) {
+    if (addedItems.size === 0) {
+      orderButton.disabled = true;
+    } else {
+      orderButton.disabled = false;
+    }
+  }
   if (checkoutTotalElement) {
+    addedItems.forEach((value, key) => {
+      totalPrice =
+        totalPrice +
+        allMeals.data.find((meal) => meal.id === Number(key)).meal_price *
+          value;
+    });
     checkoutTotalElement.innerText = `Total Price $${totalPrice}`;
   }
 

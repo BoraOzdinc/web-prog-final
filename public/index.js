@@ -1,8 +1,14 @@
-const allCategories = await axios.get("/get-categories");
-
-
+import "./pages/meals/index.js";
 const categoryContainer = document.getElementById("category-container");
-if (categoryContainer && allCategories) {
+
+if (categoryContainer) {
+  const loadingText = document.createElement("p");
+  loadingText.innerText = "Loading...";
+  categoryContainer.appendChild(loadingText);
+
+  const allCategories = await axios.get("/get-categories");
+  categoryContainer.removeChild(loadingText);
+
   allCategories.data.categories.map((category) => {
     const box = document.createElement("div");
     box.className = "btn flex flex-col items-center justify-center gap";

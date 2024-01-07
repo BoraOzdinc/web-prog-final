@@ -1,25 +1,31 @@
-import {
-  addedItems,
-  updateCart,
-  populateMapWithStorage,
-} from "../meals/index.js";
-populateMapWithStorage();
-updateCart();
+import { addedItems } from "../meals/index.js";
+
 const addedItemsIds = new Array();
 addedItems.forEach((value, key) => {
   addedItemsIds.push(key);
 });
-console.log(addedItems);
+const mealListCard = document.getElementById("checkout-items-list");
+
+const loadingText = document.createElement("p");
+loadingText.innerText = "Loading...";
+mealListCard.appendChild(loadingText);
 const meals = await axios({
   method: "post",
   url: "/get-meals-with-ids",
   data: { ids: addedItemsIds },
 });
+mealListCard.removeChild(loadingText);
 
-const mealListCard = document.getElementById("checkout-items-list");
+if (addedItems.size === 0) {
+  const err = document.createElement("p");
+  err.innerText = "No Items Added";
+  mealListCard.appendChild(err);
+}
+let totalPrice = 0;
 addedItems.forEach((value, key) => {
   const mealItem = document.createElement("checkout-item");
   if (mealListCard) {
+    totalPrice += meals.data.find((meal) => meal.id === Number(key)).meal_price;
     mealItem.setAttribute(
       "meal-name",
       meals.data.find((meal) => meal.id === Number(key)).meal_name
@@ -43,7 +49,12 @@ addedItems.forEach((value, key) => {
     mealListCard.appendChild(mealItem);
   }
 });
-
+const totalPriceElement = document.getElementById(
+  "checkout-footer-total-price"
+);
+if (totalPriceElement) {
+  totalPriceElement.innerText = String(`Your total is $${totalPrice}`);
+}
 export const orderedMeals = new Map();
 
 export function populateOrderedMeals() {
@@ -57,7 +68,6 @@ export function populateOrderedMeals() {
 populateOrderedMeals();
 const orderButton = document.getElementById("checkout-order-btn");
 if (orderButton) {
-  console.log(addedItems);
   orderButton.addEventListener("click", () => {
     addedItems.forEach((value, key) => {
       if (orderedMeals.has(key)) {

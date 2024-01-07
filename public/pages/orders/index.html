@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../general-styles.css" />
     <script defer type="module" src="./index.js"></script>
-    <script defer type="module" src="../../components/OrderItem.js"></script>
+    <script type="module" src="../../components/OrderItem.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Reastaurant - Orders</title>
   </head>
@@ -49,13 +49,16 @@
           </div>
           <p class="text-xl m-0">Orders</p>
         </div>
-        <div class="card">
+        <div class="card flex flex-col gap">
           <div id="order-items-list" class="flex flex-col gap"></div>
           <div
-            class="flex flex-col items-end justify-end"
+            class="flex flex-row items-end justify-end gap"
             id="order-items-footer"
           >
-            <p id="order-footer-total-price" class="m-0 text-xl">total</p>
+            <button class="btn" id="pay-meals-btn">Pay</button>
+            <p id="order-footer-total-price" class="m-0 text-xl">
+              Your Total is 0$
+            </p>
           </div>
         </div>
       </div>
