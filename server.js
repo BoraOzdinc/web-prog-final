@@ -26,7 +26,7 @@ app.get("/get-categories", async (req, res) => {
     res.status(500).send("An error occurred while making the request.");
   }
 });
-app.get("meals/get-all-", async (req, res) => {
+app.get("/get-all-meals", async (req, res) => {
   try {
     const categories = await axios({
       url: "http://www.themealdb.com/api/json/v1/1/categories.php",
