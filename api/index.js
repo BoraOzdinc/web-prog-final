@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
@@ -15,7 +15,7 @@ app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });
 
-app.get("/get-categories", async (req, res) => {
+app.get("/api/get-categories", async (req, res) => {
   try {
     const response = await axios({
       url: "http://www.themealdb.com/api/json/v1/1/categories.php",
@@ -26,7 +26,7 @@ app.get("/get-categories", async (req, res) => {
     res.status(500).send("An error occurred while making the request.");
   }
 });
-app.get("/get-all-meals", async (req, res) => {
+app.get("/api/get-all-meals", async (req, res) => {
   try {
     const categories = await axios({
       url: "http://www.themealdb.com/api/json/v1/1/categories.php",
@@ -67,7 +67,7 @@ app.get("/get-all-meals", async (req, res) => {
     res.status(500).send("An error occurred while making the request.");
   }
 });
-app.post("/get-meals-with-category", async (req, res) => {
+app.post("/api/get-meals-with-category", async (req, res) => {
   if (req.body.category) {
     try {
       const response = await axios({
@@ -100,7 +100,7 @@ app.post("/get-meals-with-category", async (req, res) => {
   }
 });
 
-app.post("/get-meals-with-ids", async (req, res) => {
+app.post("/api/get-meals-with-ids", async (req, res) => {
   if (req.body.ids) {
     const meals = Promise.all(
       req.body.ids.map(async (id) => {
