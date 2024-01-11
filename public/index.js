@@ -1,6 +1,6 @@
-import "./pages/meals/index.js";
+import { updateCart } from "./pages/meals/index.js";
 const categoryContainer = document.getElementById("category-container");
-
+updateCart();
 if (categoryContainer) {
   const loadingText = document.createElement("p");
   loadingText.innerText = "Loading...";
@@ -11,12 +11,13 @@ if (categoryContainer) {
 
   allCategories.data.categories.map((category) => {
     const box = document.createElement("div");
-    box.className = "btn flex flex-col items-center justify-center gap";
+    box.className =
+      "card hover flex flex-col items-center justify-center pad gap";
     const name = document.createElement("p");
     const img = document.createElement("img");
     name.innerText = category.strCategory;
     img.src = category.strCategoryThumb;
-
+    img.className = "pad";
     box.appendChild(img);
     box.appendChild(name);
     categoryContainer.appendChild(box);

@@ -1,56 +1,29 @@
-import {
-  addedItems,
-  addItemToCart,
-  removeItemFromCart,
-} from "../pages/meals/index.js";
+import { addItemToCart } from "../pages/meals/index.js";
 class MealItem extends HTMLElement {
   connectedCallback() {
     const mealId = this.getAttribute("meal-id");
-
     this.innerHTML = `
-      <div meal-id="${mealId}" class="card flex flex-col items-center justify-center">
-        <img class="rounded" alt="meal-img" height="80px" src="${this.getAttribute(
-          "meal-img"
-        )}" />
-        <p class="text text-base">${this.getAttribute("meal-name")}</p>
-        <p class="text text-sm">$${this.getAttribute("meal-price")}</p>
-        <div class="flex flex-row gap items-center justify-center">
-          <button id="remove-item-button-${mealId}" class="btn" disabled>-</button>
-          <p id="item-counter-${mealId}" class="">0</p>
-          <button id="add-item-button-${mealId}" class="btn">+</button>
-        </div>
-      </div>`;
-
-    const counterElement = this.querySelector(`#item-counter-${mealId}`);
-    const removeButton = this.querySelector(`#remove-item-button-${mealId}`);
-    const addButton = this.querySelector(`#add-item-button-${mealId}`);
-
-    counterElement.textContent = addedItems.get(mealId) ?? "0";
-
-    removeButton.addEventListener("click", () => {
-      removeItemFromCart(mealId);
-      let currentCount = parseInt(counterElement.textContent, 10);
-      currentCount--;
-      if (currentCount < 0) {
-        currentCount = 0;
-      }
-      counterElement.textContent = currentCount;
-      updateButtonStates();
-    });
+<div meal-id="${mealId}" class="meal-card">
+            <div class="card__image">
+               <img src="${this.getAttribute("meal-img")}" alt="meal-img" />
+            </div>
+            <div class="card__info">
+               <div class="card__info--title">
+                  <h3>${this.getAttribute("meal-name")}</h3>
+               </div>
+               <div class="card__info--price">
+                  <p id="item-counter-${mealId}" >$${this.getAttribute(
+      "meal-price"
+    )}</p>
+                  <button id="add-item-button-${mealId}" class="btn" >Add to card</button>
+               </div>
+            </div>
+         </div>`;
+    const addButton = document.getElementById(`add-item-button-${mealId}`);
 
     addButton.addEventListener("click", () => {
       addItemToCart(mealId);
-      let currentCount = parseInt(counterElement.textContent, 10);
-      currentCount++;
-      counterElement.textContent = currentCount;
-      updateButtonStates();
     });
-
-    const updateButtonStates = () => {
-      const currentCount = parseInt(counterElement.textContent, 10);
-      removeButton.disabled = currentCount === 0;
-    };
-    updateButtonStates();
   }
 }
 

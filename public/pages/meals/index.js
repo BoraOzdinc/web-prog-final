@@ -4,7 +4,7 @@ const category = urlParams.get("category");
 export const addedItems = new Map();
 export const orderedMeals = new Map();
 const cartBody = document.getElementById("meal-cart-popover-content");
-const allMeals = await axios.get("/get-all-meals");
+export const allMeals = await axios.get("/get-all-meals");
 if (cartBody) {
   updateCart();
 }
@@ -110,15 +110,12 @@ export async function updateCart() {
     }
     addedItems.forEach((value, key) => {
       const itemBox = document.createElement("div");
-      itemBox.className = "flex flex-row items-center justify-center ";
+      itemBox.className = "flex flex-row items-start justify-between";
 
       const item = document.createElement("p");
       const itemPrice = document.createElement("p");
       item.innerText = `${value}x ${
         allMeals.data.find((meal) => meal.id === Number(key)).meal_name
-      }`;
-      itemPrice.innerText = `$${
-        allMeals.data.find((meal) => meal.id === Number(key)).meal_price
       }`;
 
       itemBox.appendChild(item);

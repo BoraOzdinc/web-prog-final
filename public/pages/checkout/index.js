@@ -25,7 +25,8 @@ let totalPrice = 0;
 addedItems.forEach((value, key) => {
   const mealItem = document.createElement("checkout-item");
   if (mealListCard) {
-    totalPrice += meals.data.find((meal) => meal.id === Number(key)).meal_price;
+    totalPrice +=
+      meals.data.find((meal) => meal.id === Number(key)).meal_price * value;
     mealItem.setAttribute(
       "meal-name",
       meals.data.find((meal) => meal.id === Number(key)).meal_name
