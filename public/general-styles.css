@@ -79,9 +79,9 @@ a {
   border-color: #3b4542;
   border-style: dashed;
   font-weight: 600;
-  color: #00b78e;
+  color: white;
   text-transform: uppercase;
-  background-color: #232928;
+  background-color: #32703b;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
@@ -118,7 +118,7 @@ a {
   border-radius: 5px;
   border: 1px solid #3b4542;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px px 0 rgba(0, 0, 0, 0.19);
 }
 .text {
   padding: 0;
@@ -204,7 +204,7 @@ a {
   border-radius: 25px;
   border: 1px solid #3b4542;
   margin: 10px;
-  box-shadow: 5px 5px 15px 5px #3b4542;
+  background-color: #21825e;
 }
 .card__image {
   position: relative;
