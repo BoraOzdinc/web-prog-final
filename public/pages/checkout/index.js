@@ -11,7 +11,7 @@ loadingText.innerText = "Loading...";
 mealListCard.appendChild(loadingText);
 const meals = await axios({
   method: "post",
-  url: "/get-meals-with-ids",
+  url: "/api/get-meals-with-ids",
   data: { ids: addedItemsIds },
 });
 mealListCard.removeChild(loadingText);

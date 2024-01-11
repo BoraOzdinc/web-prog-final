@@ -6,7 +6,7 @@ if (categoryContainer) {
   loadingText.innerText = "Loading...";
   categoryContainer.appendChild(loadingText);
 
-  const allCategories = await axios.get("/get-categories");
+  const allCategories = await axios.get("/api/get-categories");
   categoryContainer.removeChild(loadingText);
 
   allCategories.data.categories.map((category) => {

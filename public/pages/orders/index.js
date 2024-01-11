@@ -4,7 +4,7 @@ console.log(orderedMeals);
 const loadingText = document.createElement("p");
 loadingText.innerText = "Loading...";
 mealListCard.appendChild(loadingText);
-const allMeals = await axios.get("/get-all-meals");
+const allMeals = await axios.get("/api/get-all-meals");
 mealListCard.removeChild(loadingText);
 
 let totalPrice = 0;

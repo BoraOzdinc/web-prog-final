@@ -4,7 +4,7 @@ const category = urlParams.get("category");
 export const addedItems = new Map();
 export const orderedMeals = new Map();
 const cartBody = document.getElementById("meal-cart-popover-content");
-export const allMeals = await axios.get("/get-all-meals");
+export const allMeals = await axios.get("/api/get-all-meals");
 if (cartBody) {
   updateCart();
 }
@@ -13,7 +13,7 @@ const mealList = async () => {
   if (category) {
     return await axios({
       method: "post",
-      url: "/get-meals-with-category",
+      url: "/api/get-meals-with-category",
       data: {
         category: category,
       },
