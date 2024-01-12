@@ -236,7 +236,7 @@ a {
 .card__info--price {
   text-align: right;
   margin-top: auto;
-  color: #00b700;
+  color: white;
 }
 .hover:hover {
   cursor: pointer;
