@@ -67,9 +67,11 @@ export function populateOrderedMeals() {
     : localStorage.setItem("orderedMeals", JSON.stringify([""]));
 }
 populateOrderedMeals();
+const notyf = new Notyf();
 const orderButton = document.getElementById("checkout-order-btn");
 if (orderButton) {
   orderButton.addEventListener("click", () => {
+    notyf.success("Successfully ordered the meals!");
     addedItems.forEach((value, key) => {
       if (orderedMeals.has(key)) {
         orderedMeals.set(key, orderedMeals.get(key) + value);

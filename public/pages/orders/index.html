@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/general-styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
     <script defer type="module" src="/pages/orders/index.js"></script>
     <script type="module" src="/components/OrderItem.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -23,31 +27,117 @@
         <p>Table No: 4a</p>
         <div class="routes flex flex-row gap">
           <a class="btn" href="/pages/checkout">Go to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="pad flex flex-row items-center justify-between">
+        <div class="flex flex-row items-center gap">
+          <a
+            class="btn max-w-min svg-btn m-0 flex items-center justify-center"
+            href="/"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+            >
+              <path
+                fill="white"
+                d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+              /></svg
+          ></a>
+          <p>Go To Menu</p>
+        </div>
+        <p class="text-xl m-0">Orders</p>
+      </div>
+      <div class="card flex flex-col gap">
+        <div id="order-items-list" class="flex flex-col gap"></div>
+        <div
+          class="flex flex-col items-end justify-end gap"
+          id="order-items-footer"
+        >
+          <p id="order-footer-total-price" class="m-0 text-xl">
+            Your Total is 0$
+          </p>
+          <button type="button" class="btn" data-open="modal1">Pay</button>
+          <div class="modal card" data-animation="slideInOutLeft" id="modal1">
+            <div class="modal-dialog">
+              <header class="modal-header flex flex-row gap">
+                Pay
+                <button
+                  class="close-modal btn"
+                  aria-label="close modal"
+                  data-close
+                >
+                  ✕
+                </button>
+              </header>
+              <section class="modal-content">
+                <form
+                  class="flex flex-col items-start justify-start gap"
+                  onsubmit="return onSubmit()"
+                >
+                  <div class="flex flex-col">
+                    <label for="ccno">Name on Credit Card</label>
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="Name"
+                      required
+                      class="text-input"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <label for="ccno">Credit Card</label>
+                    <input
+                      class="text-input"
+                      type="number"
+                      id="ccno"
+                      placeholder="****-****-****-****"
+                      min="1000000000000000"
+                      max="9999999999999999"
+                      required
+                      oninvalid="this.setCustomValidity('Credit Card Number must be 16 digits')"
+                      oninput="this.setCustomValidity('')"
+                    />
+                  </div>
+                  <div class="flex flex-row gap">
+                    <div class="flex flex-col">
+                      <label for="exp">Expire Date</label>
+                      <input
+                        class="text-input"
+                        type="text"
+                        id="exp"
+                        placeholder="MM/YY"
+                        minlength="4"
+                        required
+                      />
+                    </div>
+                    <div class="flex flex-col">
+                      <label for="cvv">CVV</label>
+                      <input
+                        class="text-input"
+                        type="text"
+                        id="cvv"
+                        placeholder="***"
+                        minlength="3"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <footer class="modal-footer">
+                    <button id="pay-meals-btn" type="submit" class="btn">
+                      Secure Pay
+                    </button>
+                  </footer>
+                </form>
+              </section>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="pad flex flex-row items-center justify-between">
-          <div class="flex flex-row items-center gap">
-            <a class="btn max-w-min" href="/"
-              ><img class="svg-btn" src="/images/arrow-left.png" alt="go back"
-            /></a>
-            <p>Go To Menu</p>
-          </div>
-          <p class="text-xl m-0">Orders</p>
-        </div>
-        <div class="card flex flex-col gap">
-          <div id="order-items-list" class="flex flex-col gap"></div>
-          <div
-            class="flex flex-col items-end justify-end gap"
-            id="order-items-footer"
-          >
-            <p id="order-footer-total-price" class="m-0 text-xl">
-              Your Total is 0$
-            </p>
-            <button class="btn" id="pay-meals-btn">Pay</button>
-          </div>
-        </div>
-      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
   </body>
 </html>

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/general-styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
     <script defer type="module" src="/pages/checkout/index.js"></script>
     <script defer type="module" src="/components/CheckoutItem.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -26,9 +30,20 @@
       <div class="card">
         <div class="pad flex flex-row items-center justify-between">
           <div class="flex flex-row items-center gap">
-            <a class="btn max-w-min" href="/"
-              ><img class="svg-btn" src="/images/arrow-left.png" alt="go back"
-            /></a>
+            <a
+              class="btn max-w-min svg-btn m-0 flex items-center justify-center"
+              href="/"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  fill="white"
+                  d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+                /></svg
+            ></a>
             <p>Go Back</p>
           </div>
           <p class="text-xl m-0">Checkout</p>
@@ -47,5 +62,6 @@
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
   </body>
 </html>

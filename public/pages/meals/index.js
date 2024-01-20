@@ -63,7 +63,7 @@ if (category) {
     }
   }
 }
-
+const notyf = new Notyf();
 // Function to add an item to the tracking map
 export function addItemToCart(itemId) {
   if (addedItems.has(itemId)) {
@@ -78,6 +78,7 @@ export function addItemToCart(itemId) {
     )
   );
   updateCart();
+  notyf.success("Successfully added to cart!");
 }
 
 // Function to remove an item from the tracking map
@@ -96,6 +97,7 @@ export function removeItemFromCart(itemId) {
   );
 
   updateCart();
+  notyf.success("Successfully removed from cart!");
 }
 
 export async function updateCart() {

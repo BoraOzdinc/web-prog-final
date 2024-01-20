@@ -18,9 +18,9 @@ class CheckoutItem extends HTMLElement {
         <div class="flex flex-row items-center justify-center gap">
           <p class="text text-sm">$${this.getAttribute("meal-price")}</p>
           <div class="flex flex-row gap items-center justify-center">
-            <button id="remove-item-button-${mealId}" class="btn" disabled>-</button>
+            <button id="remove-item-button-${mealId}" class="btn" disabled><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="M200-440v-80h560v80H200Z"/></svg></button>
             <p id="item-counter-${mealId}" class="">0</p>
-            <button id="add-item-button-${mealId}" class="btn">+</button>
+            <button id="add-item-button-${mealId}" class="btn"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></button>
           </div>
         </div>
       </div>`;

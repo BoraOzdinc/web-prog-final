@@ -12,7 +12,7 @@ if (categoryContainer) {
   allCategories.data.categories.map((category) => {
     const box = document.createElement("div");
     box.className =
-      "card hover flex flex-col items-center justify-center pad gap";
+      "category-card hover flex flex-col items-center justify-center gap";
     const name = document.createElement("p");
     const img = document.createElement("img");
     name.innerText = category.strCategory;
